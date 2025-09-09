@@ -5,15 +5,14 @@ double defaultMargin = 18.0;
 double defaultRadius = 10.0;
 
 // const Color kPrimaryColor = Color(0xff2B7C79);
-const Color kPrimaryColor = Color(0xFF088440);
-const Color kTabelColor = Color(0xffeae9e9);
-const Color kSecondaryColor = Color(0xFFE5A54D);
+const Color kPrimaryColor = Color(0xFF262626);
+const Color kSecondaryColor = Color(0xFFBF8622);
 const Color kGreyColor = Color(0xFFC7C7C7);
+const Color kBackgroundPrimaryColor = Color(0xff262626);
 const Color kBackgroundColor = Color(0xffFAFAFA);
-const Color kBoxColor = Color(0xffFFFFFF);
 const Color kWhiteColor = Color(0xffFFFFFF);
-const Color kUnselectColor = Color(0xffF0F0F0);
 
+const Color kBoxGreyColor = Color(0xff606060);
 const Color kBoxMenuGreenColor = Color(0xff088440);
 const Color kBoxMenuOrangeColor = Color(0xffE5A54D);
 const Color kBoxMenuRedColor = Color(0xffD1495B);
@@ -22,9 +21,10 @@ const Color kBoxMenuCoklatColor = Color(0xffFF8A00);
 const Color kBoxMenuLightBlueColor = Color(0xff2B7C79);
 const Color kBoxMenuDarkBlueColor = Color(0xff2E6274);
 
-const Color tPrimaryColor = Color(0xff088440);
+const Color tPrimaryColor = Color(0xff262626);
 const Color tDarkGreenColor = Color(0xff074623);
-const Color tSecondaryColor = Color(0xff96B3A4);
+const Color tSecondaryColor = Color(0xffBF8622);
+const Color tWhiteColor = Color(0xffFFFFFF);
 const Color tErrorColor = Color(0xffD1495B);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(
