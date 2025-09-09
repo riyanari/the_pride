@@ -1,15 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
 import 'package:the_pride/components/custom_app_bar.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:the_pride/components/custom_page_view.dart';
 import 'package:the_pride/pages/teori/level1/alphabet/mengeja_card.dart';
 import 'package:the_pride/theme/theme.dart';
+import 'package:the_pride/utils/audio_services.dart';
 
-import 'alphabet/alphabet_card.dart';
-import 'alphabet/game_card.dart';
+import 'alphabet_card.dart';
+import 'game_card.dart';
 
 class AlphabetPage extends StatefulWidget {
   const AlphabetPage({super.key});
@@ -19,12 +16,13 @@ class AlphabetPage extends StatefulWidget {
 }
 
 class _AlphabetPageState extends State<AlphabetPage> {
-  late AudioPlayer _audioPlayer;
-  String? _currentlyPlaying;
-  bool _isAudioPlayerInitialized = false;
-  final Map<String, String> _cachedAudioPaths = {};
-  final PageController _pageController = PageController();
-  int _currentPage = 0;
+  final AudioService _audioService = AudioService();
+  // late AudioPlayer _audioPlayer;
+  // String? _currentlyPlaying;
+  // bool _isAudioPlayerInitialized = false;
+  // final Map<String, String> _cachedAudioPaths = {};
+  // final PageController _pageController = PageController();
+  // int _currentPage = 0;
   final List<String> _pageTitles = [
     'A. Abjad dalam Bahasa Inggris',
     'B. Latihan Mengeja',
@@ -34,15 +32,7 @@ class _AlphabetPageState extends State<AlphabetPage> {
   @override
   void initState() {
     super.initState();
-    _initAudioPlayer();
     _preCacheFrequentlyUsedAudio();
-  }
-
-  Future<void> _initAudioPlayer() async {
-    _audioPlayer = AudioPlayer();
-    setState(() {
-      _isAudioPlayerInitialized = true;
-    });
   }
 
   // Pre-cache audio yang sering digunakan
@@ -50,79 +40,10 @@ class _AlphabetPageState extends State<AlphabetPage> {
     final frequentLetters = ['A', 'B', 'C', 'D', 'E'];
     for (final letter in frequentLetters) {
       final audioUrl = _getAudioUrlForLetter(letter);
-      await _downloadAndCacheAudio(audioUrl);
+      await _audioService.downloadAndCacheAudio(audioUrl);
     }
   }
 
-  Future<String> _downloadAndCacheAudio(String audioUrl) async {
-    if (_cachedAudioPaths.containsKey(audioUrl)) {
-      return _cachedAudioPaths[audioUrl]!;
-    }
-
-    try {
-      final directory = await getTemporaryDirectory();
-      final filePath = '${directory.path}/${_getFileNameFromUrl(audioUrl)}';
-      final file = File(filePath);
-
-      if (await file.exists()) {
-        _cachedAudioPaths[audioUrl] = filePath;
-        return filePath;
-      }
-
-      final response = await http.get(Uri.parse(audioUrl));
-      if (response.statusCode == 200) {
-        await file.writeAsBytes(response.bodyBytes);
-        _cachedAudioPaths[audioUrl] = filePath;
-        return filePath;
-      }
-    } catch (e) {
-      print('Error caching audio: $e');
-    }
-
-    return audioUrl;
-  }
-
-  String _getFileNameFromUrl(String url) {
-    return url.split('/').last;
-  }
-
-  Future<void> _playSound(String audioUrl) async {
-    if (!_isAudioPlayerInitialized) return;
-
-    try {
-      setState(() {
-        _currentlyPlaying = audioUrl;
-      });
-
-      await _audioPlayer.stop();
-
-      String audioSource;
-      try {
-        audioSource = await _downloadAndCacheAudio(audioUrl);
-      } catch (e) {
-        audioSource = audioUrl;
-      }
-
-      if (audioSource.startsWith('http')) {
-        await _audioPlayer.play(UrlSource(audioSource));
-      } else {
-        await _audioPlayer.play(DeviceFileSource(audioSource));
-      }
-
-      _audioPlayer.onPlayerStateChanged.listen((state) {
-        if (state == PlayerState.completed) {
-          setState(() {
-            _currentlyPlaying = null;
-          });
-        }
-      });
-    } catch (e) {
-      print('Error playing audio: $e');
-      setState(() {
-        _currentlyPlaying = null;
-      });
-    }
-  }
 
   String _getAudioUrlForLetter(String letter) {
     return alphabets.firstWhere(
@@ -133,36 +54,11 @@ class _AlphabetPageState extends State<AlphabetPage> {
 
   @override
   void dispose() {
-    if (_isAudioPlayerInitialized) {
-      _audioPlayer.dispose();
-    }
-    _pageController.dispose();
-    _clearOldCache();
+    _audioService.dispose();
+    _audioService.clearOldCache();
     super.dispose();
   }
 
-  Future<void> _clearOldCache() async {
-    try {
-      final directory = await getTemporaryDirectory();
-      final cacheDir = Directory('${directory.path}/');
-      if (await cacheDir.exists()) {
-        final files = cacheDir.listSync();
-        final now = DateTime.now();
-
-        for (final file in files) {
-          if (file is File) {
-            final stat = await file.stat();
-            final age = now.difference(stat.modified);
-            if (age.inDays > 7) {
-              await file.delete();
-            }
-          }
-        }
-      }
-    } catch (e) {
-      print('Error clearing cache: $e');
-    }
-  }
 
   // Daftar alphabet dengan pengucapan dan URL audio dari server
   final List<Map<String, String>> alphabets = [
@@ -530,7 +426,7 @@ class _AlphabetPageState extends State<AlphabetPage> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Text(
-            _pageTitles[_currentPage],
+            _pageTitles[0],
             style: primaryTextStyle.copyWith(
               fontSize: 14,
               fontWeight: semiBold,
@@ -558,8 +454,8 @@ class _AlphabetPageState extends State<AlphabetPage> {
                 sound: alphabet['sound']!,
                 audioUrl: alphabet['audio']!,
                 color: color,
-                isPlaying: _currentlyPlaying == alphabet['audio'],
-                onTap: () => _playSound(alphabet['audio']!),
+                isPlaying: _audioService.currentlyPlaying == alphabet['audio'],
+                onTap: () => _audioService.playSound(alphabet['audio']!),
               );
             },
           ),
@@ -576,7 +472,7 @@ class _AlphabetPageState extends State<AlphabetPage> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Text(
-            _pageTitles[_currentPage],
+            _pageTitles[1],
             style: primaryTextStyle.copyWith(
               fontSize: 14,
               fontWeight: semiBold,
@@ -606,8 +502,8 @@ class _AlphabetPageState extends State<AlphabetPage> {
                 imagePath: mengeja['image']!,
                 audioUrl: mengeja['audio']!,
                 color: color,
-                isPlaying: _currentlyPlaying == mengeja['audio'],
-                onTap: () => _playSound(mengeja['audio']!),
+                isPlaying: _audioService.currentlyPlaying == mengeja['audio'],
+                onTap: () => _audioService.playSound(mengeja['audio']!),
               );
             },
           ),
@@ -624,7 +520,7 @@ class _AlphabetPageState extends State<AlphabetPage> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Text(
-            _pageTitles[_currentPage],
+            _pageTitles[2],
             style: primaryTextStyle.copyWith(
               fontSize: 14,
               fontWeight: semiBold,
@@ -654,8 +550,8 @@ class _AlphabetPageState extends State<AlphabetPage> {
                 imagePath: mengeja['image']!,
                 audioUrl: mengeja['audio']!,
                 color: color,
-                isPlaying: _currentlyPlaying == mengeja['audio'],
-                onTap: () => _playSound(mengeja['audio']!),
+                isPlaying: _audioService.currentlyPlaying == mengeja['audio'],
+                onTap: () => _audioService.playSound(mengeja['audio']!),
               );
             },
           ),
@@ -668,109 +564,16 @@ class _AlphabetPageState extends State<AlphabetPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar("The Alphabet In English", iconSize: 14.0),
-      body: Column(
-        children: [
-          // Linear Progress Indicator di luar PageView
-          LinearProgressIndicator(
-            value: (_currentPage + 1) / _pageTitles.length,
-            backgroundColor: Colors.grey[300],
-            valueColor: AlwaysStoppedAnimation<Color>(kSecondaryColor),
-            minHeight: 6,
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (index) {
-                setState(() {
-                  _currentPage = index;
-                });
-              },
-              children: [
-                _buildAlphabetPage(),
-                _buildMengejaPage(),
-                _buildGamePage()
-                // _buildPlaceholderPage(
-                //   "C. Alphabet Game",
-                //   "Halaman ini sedang dalam pengembangan. Game seru untuk belajar alphabet akan segera tersedia!",
-                // ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-            child: Row(
-              children: [
-                // Previous Button - Only show if not on first page
-                if (_currentPage > 0)
-                  Expanded(
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: kWhiteColor,
-                        side: const BorderSide(color: kSecondaryColor),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                      ),
-                      onPressed: () {
-                        _pageController.previousPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      },
-                      child: Text(
-                        "SEBELUMNYA",
-                        style: TextStyle(
-                          color: kSecondaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                if (_currentPage > 0) const SizedBox(width: 16),
-
-                // Next/Finish Button
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: kSecondaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    onPressed: () {
-                      if (_currentPage < _pageTitles.length - 1) {
-                        // Go to next page if not on last page
-                        _pageController.nextPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      } else {
-                        // Handle finish action on last page
-                        // You can add your finish logic here
-                        print("Finished alphabet learning!");
-                      }
-                    },
-                    child: Text(
-                      _currentPage == _pageTitles.length - 1
-                          ? "SELESAI"
-                          : "SELANJUTNYA",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+      body: CustomPageView(
+        pageTitles: _pageTitles,
+        pages: [
+          _buildAlphabetPage(),
+          _buildMengejaPage(),
+          _buildGamePage(),
         ],
+        onFinish: () {
+          print("Finished alphabet learning!");
+        },
       ),
     );
   }

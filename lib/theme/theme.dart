@@ -36,7 +36,7 @@ TextStyle errorTextStyle = GoogleFonts.poppins(
 );
 
 TextStyle secondaryTextStyle = GoogleFonts.poppins(
-    color:tSecondaryColor
+    color:kSecondaryColor
 );
 
 TextStyle titleTextStyle = GoogleFonts.sairaStencilOne(
