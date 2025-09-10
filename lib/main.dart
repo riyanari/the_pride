@@ -5,6 +5,7 @@ import 'package:the_pride/pages/splash_page.dart';
 import 'package:the_pride/pages/teori/level1/alphabet/alphabet_page.dart';
 import 'package:the_pride/pages/teori/level1/level1_page.dart';
 import 'package:the_pride/pages/teori/level1/pronunciation/pronunciation_page.dart';
+import 'package:the_pride/pages/teori/level1/punctuation/punctuation_page.dart';
 import 'package:the_pride/pages/teori/level2/level2_page.dart';
 import 'package:the_pride/pages/teori/level3/level3_page.dart';
 import 'package:the_pride/pages/teori/level4/level4_page.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
 
         '/chapter1/alphabet': (context) => AlphabetPage(),
         '/chapter1/pronunciation': (context) => PronunciationPage(),
+        '/chapter1/punctuation': (context) => PunctuationPage(),
         // '/chapter1/punctuation': (context) => PunctuationScreen(),
         // '/chapter2/greeting': (context) => GreetingScreen(),
         // '/chapter2/compliment': (context) => ComplimentScreen(),

@@ -17,12 +17,6 @@ class AlphabetPage extends StatefulWidget {
 
 class _AlphabetPageState extends State<AlphabetPage> {
   final AudioService _audioService = AudioService();
-  // late AudioPlayer _audioPlayer;
-  // String? _currentlyPlaying;
-  // bool _isAudioPlayerInitialized = false;
-  // final Map<String, String> _cachedAudioPaths = {};
-  // final PageController _pageController = PageController();
-  // int _currentPage = 0;
   final List<String> _pageTitles = [
     'A. Abjad dalam Bahasa Inggris',
     'B. Latihan Mengeja',
@@ -571,9 +565,6 @@ class _AlphabetPageState extends State<AlphabetPage> {
           _buildMengejaPage(),
           _buildGamePage(),
         ],
-        onFinish: () {
-          print("Finished alphabet learning!");
-        },
       ),
     );
   }
