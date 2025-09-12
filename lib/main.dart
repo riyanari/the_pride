@@ -12,6 +12,7 @@ import 'package:the_pride/pages/teori/level1/chapter3/hobbies/hobbies_page.dart'
 import 'package:the_pride/pages/teori/level1/chapter3/jobs/jobs_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter4/numbers/numbers_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter4/times/time_page.dart';
+import 'package:the_pride/pages/teori/level1/chapter5/foods/food_page.dart';
 import 'package:the_pride/pages/teori/level1/level1_page.dart';
 import 'package:the_pride/pages/teori/level2/level2_page.dart';
 import 'package:the_pride/pages/teori/level3/level3_page.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
         '/1/chapter3/hobby': (context) => HobbiesPage(),
         '/1/chapter4/number': (context) => NumbersPage(),
         '/1/chapter4/time': (context) => TimePage(),
+        '/1/chapter5/food': (context) => FoodPage(),
       },
     );
   }
