@@ -7,6 +7,7 @@ import 'package:the_pride/pages/teori/level1/chapter4/times/tabs/game_mcq.dart';
 import 'package:the_pride/pages/teori/level1/chapter4/times/tabs/game_ordering.dart';
 import 'package:the_pride/pages/teori/level1/chapter4/times/tabs/pengertian_tab.dart';
 import 'package:the_pride/pages/teori/level1/chapter4/times/tabs/penjelasan_tab.dart';
+import 'package:the_pride/pages/teori/level1/chapter4/times/tabs/time_spelling_game.dart';
 import 'package:the_pride/pages/teori/level1/chapter4/times/tabs/vocab_tab.dart';
 
 class TimePage extends StatelessWidget {
@@ -22,6 +23,7 @@ class TimePage extends StatelessWidget {
       'Game: Best Choice',
       'Game: Gap Fill',
       'Game: Ordering',
+      'Game: Spelling',
     ];
 
     return Scaffold(
@@ -36,6 +38,7 @@ class TimePage extends StatelessWidget {
           TimeMcqGame(),
           TimeGapFillGame(),
           TimeOrderingGame(),
+          TimeSpellingGame(),
         ],
         onFinish: () => Navigator.pop(context),
       ),
