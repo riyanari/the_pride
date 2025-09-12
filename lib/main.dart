@@ -7,6 +7,9 @@ import 'package:the_pride/pages/teori/level1/chapter1/pronunciation/pronunciatio
 import 'package:the_pride/pages/teori/level1/chapter1/punctuation/punctuation_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter2/compliment/compliment_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter2/greatings_page.dart';
+import 'package:the_pride/pages/teori/level1/chapter3/family/family_page.dart';
+import 'package:the_pride/pages/teori/level1/chapter3/hobbies/hobbies_page.dart';
+import 'package:the_pride/pages/teori/level1/chapter3/jobs/jobs_page.dart';
 import 'package:the_pride/pages/teori/level1/level1_page.dart';
 import 'package:the_pride/pages/teori/level2/level2_page.dart';
 import 'package:the_pride/pages/teori/level3/level3_page.dart';
@@ -34,14 +37,14 @@ class MyApp extends StatelessWidget {
         'level4_lord': (context) => Level4Page(),
 
 
-        '/chapter1/alphabet': (context) => AlphabetPage(),
-        '/chapter1/pronunciation': (context) => PronunciationPage(),
-        '/chapter1/punctuation': (context) => PunctuationPage(),
-        '/chapter2/greeting': (context) => GreetingsPage(),
-        '/chapter2/compliment': (context) => ComplimentsPage(),
-        // '/chapter3/family': (context) => FamilyScreen(),
-        // '/chapter3/job': (context) => JobScreen(),
-        // '/chapter3/hobby': (context) => HobbyScreen(),
+        '/1/chapter1/alphabet': (context) => AlphabetPage(),
+        '/1/chapter1/pronunciation': (context) => PronunciationPage(),
+        '/1/chapter1/punctuation': (context) => PunctuationPage(),
+        '/1/chapter2/greeting': (context) => GreetingsPage(),
+        '/1/chapter2/compliment': (context) => ComplimentsPage(),
+        '/1/chapter3/family': (context) => FamilyPage(),
+        '/1/chapter3/job': (context) => JobsPage(),
+        '/1/chapter3/hobby': (context) => HobbiesPage(),
       },
     );
   }

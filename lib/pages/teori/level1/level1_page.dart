@@ -25,15 +25,15 @@ class Level1Page extends StatelessWidget {
         'sub_chapters': [
           {
             'title': 'The Alphabet in English',
-            'route': '/chapter1/alphabet',
+            'route': '/1/chapter1/alphabet',
           },
           {
             'title': 'Pronunciation',
-            'route': '/chapter1/pronunciation',
+            'route': '/1/chapter1/pronunciation',
           },
           {
             'title': 'Punctuation',
-            'route': '/chapter1/punctuation',
+            'route': '/1/chapter1/punctuation',
           },
         ],
       },
@@ -43,11 +43,11 @@ class Level1Page extends StatelessWidget {
         'sub_chapters': [
           {
             'title': 'Greeting',
-            'route': '/chapter2/greeting',
+            'route': '/1/chapter2/greeting',
           },
           {
             'title': 'Giving and Responding to Compliment',
-            'route': '/chapter2/compliment',
+            'route': '/1/chapter2/compliment',
           },
         ],
       },
@@ -57,15 +57,105 @@ class Level1Page extends StatelessWidget {
         'sub_chapters': [
           {
             'title': 'Family',
-            'route': '/chapter3/family',
+            'route': '/1/chapter3/family',
           },
           {
             'title': 'Job and Profession',
-            'route': '/chapter3/job',
+            'route': '/1/chapter3/job',
           },
           {
             'title': 'Hobby',
-            'route': '/chapter3/hobby',
+            'route': '/1/chapter3/hobby',
+          },
+        ],
+      },
+      {
+        'chapter': 'Chapter 4',
+        'judul_chapter': 'Numbers, Time & Everyday Life',
+        'sub_chapters': [
+          {
+            'title': 'Number',
+            'route': '/1/chapter4/number',
+          },
+          {
+            'title': 'Time',
+            'route': '/1/chapter4/time',
+          },
+        ],
+      },
+      {
+        'chapter': 'Chapter 5',
+        'judul_chapter': 'Food, Color & Things Around Me',
+        'sub_chapters': [
+          {
+            'title': 'Food',
+            'route': '/1/chapter5/food',
+          },
+          {
+            'title': 'Color',
+            'route': '/1/chapter5/color',
+          },
+        ],
+      },
+      {
+        'chapter': 'Chapter 6',
+        'judul_chapter': 'Exploring the World',
+        'sub_chapters': [
+          {
+            'title': 'Country',
+            'route': '/1/chapter6/country',
+          },
+          {
+            'title': 'Map and Direction',
+            'route': '/1/chapter6/map',
+          },
+        ],
+      },
+      {
+        'chapter': 'Chapter 7',
+        'judul_chapter': 'Body Language & Social Interaction',
+        'sub_chapters': [
+          {
+            'title': 'Gesture',
+            'route': '/1/chapter7/gesture',
+          },
+          {
+            'title': 'Complaining and Apologizing',
+            'route': '/1/chapter7/complain',
+          },
+        ],
+      },
+      {
+        'chapter': 'Chapter 8',
+        'judul_chapter': 'Asking Questions & Getting Answers',
+        'sub_chapters': [
+          {
+            'title': 'Question Word',
+            'route': '/1/chapter8/question',
+          },
+          {
+            'title': 'Complaining and Apologizing',
+            'route': '/1/chapter8/complain',
+          },
+        ],
+      },
+      {
+        'chapter': 'Chapter 9',
+        'judul_chapter': 'Making Requests & Suggestions',
+        'sub_chapters': [
+          {
+            'title': 'Suggestion and Request',
+            'route': '/1/chapter9/suggestion',
+          },
+        ],
+      },
+      {
+        'chapter': 'Chapter 10',
+        'judul_chapter': 'Procedures & Instructions',
+        'sub_chapters': [
+          {
+            'title': 'Procedure',
+            'route': '/1/chapter10/procedure',
           },
         ],
       },
