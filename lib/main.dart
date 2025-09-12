@@ -14,6 +14,8 @@ import 'package:the_pride/pages/teori/level1/chapter4/numbers/numbers_page.dart'
 import 'package:the_pride/pages/teori/level1/chapter4/times/time_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter5/colors/color_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter5/foods/food_page.dart';
+import 'package:the_pride/pages/teori/level1/chapter6/country/country_page.dart';
+import 'package:the_pride/pages/teori/level1/chapter6/map_direction/map_direction_page.dart';
 import 'package:the_pride/pages/teori/level1/level1_page.dart';
 import 'package:the_pride/pages/teori/level2/level2_page.dart';
 import 'package:the_pride/pages/teori/level3/level3_page.dart';
@@ -53,6 +55,8 @@ class MyApp extends StatelessWidget {
         '/1/chapter4/time': (context) => TimePage(),
         '/1/chapter5/food': (context) => FoodPage(),
         '/1/chapter5/color': (context) => ColorPage(),
+        '/1/chapter6/country': (context) => CountryPage(),
+        '/1/chapter6/map': (context) => MapDirectionPage(),
       },
     );
   }
