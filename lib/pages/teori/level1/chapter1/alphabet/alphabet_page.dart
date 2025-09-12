@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:the_pride/components/custom_app_bar.dart';
 import 'package:the_pride/components/custom_page_view.dart';
-import 'package:the_pride/pages/teori/level1/alphabet/mengeja_card.dart';
 import 'package:the_pride/theme/theme.dart';
 import 'package:the_pride/utils/audio_services.dart';
 
 import 'alphabet_card.dart';
 import 'game_card.dart';
+import 'mengeja_card.dart';
 
 class AlphabetPage extends StatefulWidget {
   const AlphabetPage({super.key});

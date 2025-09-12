@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:the_pride/components/custom_app_bar.dart';
 import 'package:the_pride/components/custom_page_view.dart';
-import 'package:the_pride/pages/teori/level1/punctuation/punctuation1_tab.dart';
-import 'package:the_pride/pages/teori/level1/punctuation/puntuation2_tab.dart';
+
+import 'punctuation1_tab.dart';
+import 'puntuation2_tab.dart';
 
 /// PunctuationPage
 /// Versi **HALAMAN** (bukan tab) untuk pembelajaran tanda baca.
