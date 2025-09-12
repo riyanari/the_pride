@@ -250,9 +250,9 @@ class _TimeSpellingGameState extends State<TimeSpellingGame> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.08),
+                  color: color.withValues(alpha:0.08),
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: color.withOpacity(0.25)),
+                  border: Border.all(color: color.withValues(alpha:0.25)),
                 ),
                 child: Text('Skor: $_score', style: primaryTextStyle),
               ),
@@ -269,10 +269,10 @@ class _TimeSpellingGameState extends State<TimeSpellingGame> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             decoration: BoxDecoration(
-              color: Colors.indigo.withOpacity(0.08),
+              color: Colors.indigo.withValues(alpha:0.08),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.indigo.withOpacity(0.25)),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 6, offset: const Offset(0,2))],
+              border: Border.all(color: Colors.indigo.withValues(alpha:0.25)),
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha:0.06), blurRadius: 6, offset: const Offset(0,2))],
             ),
             child: Row(
               children: [
@@ -382,7 +382,7 @@ class _DigitalPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: color.withOpacity(0.06),
+      color: color.withValues(alpha:0.06),
       child: Center(
         child: Text(
           hhmm,
