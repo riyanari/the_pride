@@ -26,7 +26,7 @@ class _JobsKosakataTabState extends State<JobsKosakataTab> {
 
     final width = MediaQuery.of(context).size.width;
     final isNarrow = width < 360;
-    final extent = isNarrow ? 210.0 : 230.0;
+    final extent = isNarrow ? 220.0 : 250.0;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 16),

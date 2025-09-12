@@ -4,6 +4,7 @@ import '../country_shared.dart';
 
 class CountryVocabularyTab extends StatefulWidget {
   const CountryVocabularyTab({super.key});
+
   @override
   State<CountryVocabularyTab> createState() => _CountryVocabularyTabState();
 }
@@ -42,9 +43,13 @@ class _CountryVocabularyTabState extends State<CountryVocabularyTab> {
           const SizedBox(height: 12),
           Expanded(
             child: GridView.builder(
+              shrinkWrap: true,
               itemCount: items.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10, childAspectRatio: 1,
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 0.8,
               ),
               itemBuilder: (_, i) => countryTile(items[i], audio: audio),
             ),

@@ -4,6 +4,7 @@ import '../map_direction_shared.dart';
 
 class MapDirVocabularyTab extends StatefulWidget {
   const MapDirVocabularyTab({super.key});
+
   @override
   State<MapDirVocabularyTab> createState() => _MapDirVocabularyTabState();
 }
@@ -53,9 +54,13 @@ class _MapDirVocabularyTabState extends State<MapDirVocabularyTab> {
           const SizedBox(height: 12),
           Expanded(
             child: GridView.builder(
+              shrinkWrap: true,
               itemCount: items.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10, childAspectRatio: 0.9,
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                // mainAxisExtent: 150,
               ),
               itemBuilder: (_, i) => vocabTile(items[i], audio: audio),
             ),

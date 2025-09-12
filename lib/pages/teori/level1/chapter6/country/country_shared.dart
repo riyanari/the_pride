@@ -375,10 +375,10 @@ Widget tipCard(Tip tip, Color color) => Container(
 );
 
 Widget countryTile(
-  CountryVocab v, {
-  Color color = Colors.teal,
-  AudioService? audio,
-}) {
+    CountryVocab v, {
+      Color color = Colors.teal,
+      AudioService? audio,
+    }) {
   return Container(
     decoration: BoxDecoration(
       color: Colors.white,
@@ -395,78 +395,72 @@ Widget countryTile(
     child: Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
+        mainAxisSize: MainAxisSize.min,                   // ⬅️ penting (tidak minta ruang tak terbatas)
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Bar atas: bendera + tombol audio
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(v.flag, style: const TextStyle(fontSize: 26)),
               if (audio != null)
                 SizedBox(
-                  width: 32,
-                  height: 32,
+                  width: 32, height: 32,
                   child: IconButton(
                     padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints.tightFor(
-                      width: 32,
-                      height: 32,
-                    ),
+                    constraints: const BoxConstraints.tightFor(width: 32, height: 32),
                     tooltip: 'Play',
-                    onPressed: () =>
-                        audio.playSound(v.audio ?? kCountryAudioUrl),
+                    onPressed: () => audio.playSound(v.audio ?? kCountryAudioUrl),
                     icon: Icon(Icons.volume_up, color: color, size: 20),
                   ),
                 ),
             ],
           ),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        v.country,
-                        style: primaryTextStyle.copyWith(fontWeight: semiBold),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  '${v.indo} • ${v.nationality}',
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 12,
-                    color: Colors.grey[800],
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  'Lang: ${v.language} • Capital: ${v.capital}',
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 11,
-                    color: Colors.grey[700],
-                  ),
-                  maxLines: null,
-                ),
-                if (v.example != null)
-                  Text(
-                    v.example!,
-                    style: primaryTextStyle.copyWith(fontSize: 12),
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-              ],
-            ),
+          const SizedBox(height: 6),
+
+          // Nama negara (EN)
+          Text(
+            v.country,
+            style: primaryTextStyle.copyWith(fontWeight: semiBold),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
+
+          // Indo + nationality
+          Text(
+            '${v.indo} • ${v.nationality}${v.ipa != null ? '  ${v.ipa}' : ''}',
+            style: primaryTextStyle.copyWith(fontSize: 12, color: Colors.grey[800]),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
+          ),
+
+          // Bahasa & ibu kota (wrap supaya gampang turun baris)
+          const SizedBox(height: 2),
+          Text(
+            'Lang: ${v.language} • Capital: ${v.capital}',
+            style: primaryTextStyle.copyWith(fontSize: 11, color: Colors.grey[700]),
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
+          ),
+
+          if (v.example != null) ...[
+            const SizedBox(height: 6),
+            Text(
+              v.example!,
+              style: primaryTextStyle.copyWith(fontSize: 12),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+            ),
+          ],
         ],
       ),
     ),
   );
 }
+
 
 /// Utils
 List<CountryVocab> byRegion(String region) =>
