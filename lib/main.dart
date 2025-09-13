@@ -5,6 +5,7 @@ import 'package:the_pride/pages/splash_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter1/alphabet/alphabet_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter1/pronunciation/pronunciation_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter1/punctuation/punctuation_page.dart';
+import 'package:the_pride/pages/teori/level1/chapter10/procedure/procedures_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter2/compliment/compliment_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter2/greatings_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter3/family/family_page.dart';
@@ -67,6 +68,7 @@ class MyApp extends StatelessWidget {
         '/1/chapter8/question': (context) => QuestionWordPage(),
         '/1/chapter8/auxv': (context) => BasicAuxVPage(),
         '/1/chapter9/suggestion': (context) => SuggestionRequestPage(),
+        '/1/chapter10/procedure': (context) => ProceduresPage(),
       },
     );
   }
