@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:the_pride/components/custom_app_bar.dart';
 import 'package:the_pride/components/custom_page_view.dart';
+import 'package:the_pride/pages/teori/level1/chapter1/pronunciation/minimal_pairs_game_page.dart';
+import 'package:the_pride/pages/teori/level1/chapter1/pronunciation/shadowing_practice_page.dart';
+import 'package:the_pride/pages/teori/level1/chapter1/pronunciation/syllable_count_game_page.dart';
+import 'package:the_pride/pages/teori/level1/chapter1/pronunciation/word_stress_game_page.dart';
 import 'package:the_pride/utils/audio_services.dart';
 
 import 'consonant_page.dart';
@@ -26,37 +30,12 @@ class _PronunciationPageState extends State<PronunciationPage> {
     'pronun Test',
     'Word Connection',
     'Sound Lessons',
-    'Pronunciation Practice',
+    'Shadowing',
+    'Minimal Paris',
+    'Syllable Count',
+    'Word Stress',
+    // 'Pronunciation Practice',
   ];
-
-  Widget _buildPracticePage() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.mic, size: 64, color: Colors.green[400]),
-            const SizedBox(height: 16),
-            Text(
-              'Practice Area',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[700],
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Interactive pronunciation practice coming soon',
-              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +62,14 @@ class _PronunciationPageState extends State<PronunciationPage> {
             audioService: _audioService,
             title: _pageTitles[5],
           ),
-          _buildPracticePage(),
+          ShadowingPracticePage(audioService: _audioService),
+          MinimalPairsGamePage(audioService: _audioService),
+          SyllableCountGamePage(),
+          WordStressGamePage()
+          // PronunPracticeTabs(
+          //   audioService: _audioService,
+          //   title: _pageTitles[7],
+          // ),
         ],
         onFinish: () {
           Navigator.pop(context);

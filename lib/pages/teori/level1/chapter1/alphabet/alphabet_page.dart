@@ -5,7 +5,7 @@ import 'package:the_pride/theme/theme.dart';
 import 'package:the_pride/utils/audio_services.dart';
 
 import 'alphabet_card.dart';
-import 'game_card.dart';
+import 'alphabet_listen_mcq_game.dart';
 import 'mengeja_card.dart';
 
 class AlphabetPage extends StatefulWidget {
@@ -507,51 +507,7 @@ class _AlphabetPageState extends State<AlphabetPage> {
   }
 
   Widget _buildGamePage() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Text(
-            _pageTitles[2],
-            style: primaryTextStyle.copyWith(
-              fontSize: 14,
-              fontWeight: semiBold,
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        Expanded(
-          child: GridView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              childAspectRatio: 0.75,
-            ),
-            itemCount: mengejas.length,
-            itemBuilder: (context, index) {
-              final mengeja = mengejas[index];
-              final colorIndex = index % colorPalette.length;
-              final color = colorPalette[colorIndex];
-
-              return GameCard(
-                letter: mengeja['letter']!,
-                sound: mengeja['sound']!,
-                word: mengeja['word']!,
-                imagePath: mengeja['image']!,
-                audioUrl: mengeja['audio']!,
-                color: color,
-                isPlaying: _audioService.currentlyPlaying == mengeja['audio'],
-                onTap: () => _audioService.playSound(mengeja['audio']!),
-              );
-            },
-          ),
-        ),
-      ],
-    );
+    return AlphabetListenMCQGame(items: alphabets);
   }
 
   @override
