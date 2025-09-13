@@ -20,6 +20,7 @@ import 'package:the_pride/pages/teori/level1/chapter7/complain_apologize/complai
 import 'package:the_pride/pages/teori/level1/chapter7/gesture/gesture_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter8/auxv/basic_auxv_page.dart';
 import 'package:the_pride/pages/teori/level1/chapter8/questions/question_word_page.dart';
+import 'package:the_pride/pages/teori/level1/chapter9/sugreq/suggestion_request_page.dart';
 import 'package:the_pride/pages/teori/level1/level1_page.dart';
 import 'package:the_pride/pages/teori/level2/level2_page.dart';
 import 'package:the_pride/pages/teori/level3/level3_page.dart';
@@ -65,6 +66,7 @@ class MyApp extends StatelessWidget {
         '/1/chapter7/complain': (context) => ComplainingApologizingPage(),
         '/1/chapter8/question': (context) => QuestionWordPage(),
         '/1/chapter8/auxv': (context) => BasicAuxVPage(),
+        '/1/chapter9/suggestion': (context) => SuggestionRequestPage(),
       },
     );
   }
