@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/theme.dart';
+import 'components/course_tail.dart';
 
 class TeoriPage extends StatelessWidget {
   const TeoriPage({super.key});
@@ -126,220 +127,25 @@ class TeoriPage extends StatelessWidget {
 
   Widget kursusDiikuti() {
     final courses = dataKursusDiikuti();
+    // final repo = CourseRepository();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           "Kursus yang diikuti",
-          style: primaryTextStyle.copyWith(
-            fontSize: 12,
-          ),
+          style: primaryTextStyle.copyWith(fontSize: 12),
         ),
         const SizedBox(height: 12),
         SizedBox(
           height: 240,
           child: ListView.separated(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: courses.length,
             separatorBuilder: (context, index) => const SizedBox(width: 10),
             itemBuilder: (context, index) {
-              final course = courses[index];
-              final progress = course['progress'] as int;
-              final isCompleted = progress == 100;
-              // final isLocked = progress == 0;
-
-              return GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, course['nav']);
-                },
-                child: Container(
-                  width: 170,
-                  margin: EdgeInsets.only(bottom: 20),
-                  decoration: BoxDecoration(
-                    color: kBoxGreyColor,
-                    borderRadius: BorderRadius.circular(18),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.35),
-                        blurRadius: 8,
-                        offset: const Offset(8, 4),
-                      ),
-                    ],
-                  ),
-                  child: Stack(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Gambar kursus dengan badge completed jika 100%
-                          Stack(
-                            children: [
-                              Container(
-                                height: 140,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(18),
-                                    topRight: Radius.circular(18),
-                                  ),
-                                  color: kBackgroundPrimaryColor,
-                                  image: DecorationImage(
-                                    image: AssetImage(course['image']),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                              if (isCompleted)
-                                Positioned(
-                                  top: 8,
-                                  right: 8,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                      size: 16,
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          ),
-
-                          // Konten teks dan progress bar
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  // Bagian atas: level, nama, kode kelas
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            course['level'],
-                                            style: whiteTextStyle.copyWith(
-                                              fontSize: 8,
-                                            ),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          Text(
-                                            course['kd_kelas'],
-                                            style: whiteTextStyle.copyWith(
-                                              fontSize: 8,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        course['name'],
-                                        style: whiteTextStyle.copyWith(
-                                          fontSize: 10,
-                                          fontWeight: semiBold,
-                                        ),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
-
-                                  // Bagian bawah: progress bar atau status completed
-                                  isCompleted
-                                      ? Container(
-                                    padding: const EdgeInsets.symmetric(vertical: 4),
-                                    decoration: BoxDecoration(
-                                      color: Colors.green.withValues(alpha: 0.2),
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.check_circle,
-                                          color: Colors.green,
-                                          size: 12,
-                                        ),
-                                        const SizedBox(width: 4),
-                                        Text(
-                                          'Completed',
-                                          style: TextStyle(
-                                            color: Colors.green,
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                      : Row(
-                                    children: [
-                                      Expanded(
-                                        child: LinearProgressIndicator(
-                                          minHeight: 8,
-                                          value: progress / 100, // Convert integer to double for progress bar
-                                          backgroundColor: kWhiteColor,
-                                          valueColor: AlwaysStoppedAnimation<Color>(kSecondaryColor),
-                                          borderRadius: BorderRadius.circular(4),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Text(
-                                        '$progress%', // Langsung menggunakan integer
-                                        style: whiteTextStyle.copyWith(
-                                          fontSize: 10,
-                                          fontWeight: semiBold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      // Overlay untuk kursus yang belum dimulai (progress 0%)
-                      // if (isLocked)
-                      //   Container(
-                      //     decoration: BoxDecoration(
-                      //       color: Colors.black.withValues(alpha: 0.5),
-                      //       borderRadius: BorderRadius.circular(18),
-                      //     ),
-                      //     child: Center(
-                      //       child: Container(
-                      //         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      //         decoration: BoxDecoration(
-                      //           color: Colors.grey[700],
-                      //           borderRadius: BorderRadius.circular(8),
-                      //         ),
-                      //         child: Text(
-                      //           'Locked',
-                      //           style: TextStyle(
-                      //             color: Colors.white,
-                      //             fontSize: 12,
-                      //             fontWeight: FontWeight.bold,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                    ],
-                  ),
-                ),
-              );
+              return CourseTile(course: courses[index]);
             },
           ),
         ),

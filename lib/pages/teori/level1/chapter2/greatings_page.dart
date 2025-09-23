@@ -5,6 +5,10 @@ import 'package:the_pride/components/custom_page_view.dart';
 import 'package:the_pride/theme/theme.dart';
 import 'package:the_pride/utils/audio_services.dart';
 
+import 'greeting/tabs/greetings_game_gapfill.dart';
+import 'greeting/tabs/greetings_game_match.dart';
+import 'greeting/tabs/greetings_game_mcq.dart';
+
 /// GreetingsPage
 /// Halaman (dengan 3 tab internal via CustomPageView) untuk pembelajaran sapaan:
 /// 1) Pengertian
@@ -23,6 +27,9 @@ class _GreetingsPageState extends State<GreetingsPage> {
     'Pengertian',
     'Asking Condition',
     'Farewell / Parting',
+    'Game: MCQ',
+    'Game: Match',
+    'Game: Gap Fill',
   ];
 
   static const _audioUrl = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
@@ -235,6 +242,9 @@ class _GreetingsPageState extends State<GreetingsPage> {
           _buildPengertianTab(),
           _buildAskingTab(),
           _buildFarewellTab(),
+          const GreetingsMCQGame(),
+          const GreetingsMatchGame(),
+          const GreetingsGapFillGame(),
         ],
         onFinish: () => Navigator.pop(context),
       ),
