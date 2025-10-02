@@ -384,7 +384,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         backgroundColor: Colors.green,
                       ),
                     );
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kSecondaryColor,
