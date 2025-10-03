@@ -288,12 +288,27 @@ class _DetailRewardPageState extends State<DetailRewardPage> {
               right: 0,
               child: Column(
                 children: [
+                      // widget.reward.imagePath,
                   Center(
-                    child: Image.asset(
-                      widget.reward.imagePath,
-                      height: MediaQuery.of(context).size.height * 0.35,
-                      fit: BoxFit.contain,
-                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 14.0),
+                      child: Image.asset(
+                        widget.reward.imagePath.isNotEmpty ? widget.reward.imagePath : "assets/no_img.png",
+                        height: MediaQuery.of(context).size.height * 0.35,
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) {
+                          // fallback kalau file benar-benar tidak ada
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 18.0),
+                            child: Image.asset(
+                              "assets/no_img.png",
+                              height: MediaQuery.of(context).size.height * 0.30,
+                              fit: BoxFit.contain,
+                            ),
+                          );
+                        },
+                      ),
+                    )
                   ),
                 ],
               ),

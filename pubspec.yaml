@@ -40,6 +40,7 @@ dependencies:
   path_provider: ^2.1.4
   http: ^1.4.0
   awesome_dialog: ^3.2.0
+  sliding_action_button: ^0.0.8
 
 dev_dependencies:
   flutter_test:
