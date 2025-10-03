@@ -74,7 +74,7 @@ class AccountsPage extends StatelessWidget {
 
   Widget _buildProfileHeader() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       margin: const EdgeInsets.fromLTRB(18, 45, 18, 10),
       decoration: BoxDecoration(
         color: kSecondaryColor,
@@ -98,7 +98,7 @@ class AccountsPage extends StatelessWidget {
                     Text(
                       "RIYAN ARIYAWAN",
                       style: whiteTextStyle.copyWith(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: bold,
                       ),
                     ),
